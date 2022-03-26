@@ -1,0 +1,7 @@
+[defaults]
+project=react-test
+org=al-fe
+url=http://sentry.al.com
+
+[auth]
+token=7acaf6cd41844374913cd5abdfcf406af17eacc1496a4cc0945fe8c92b5e62e8

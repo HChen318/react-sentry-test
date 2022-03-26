@@ -1,22 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+
+import "./App.css";
 
 function App() {
+  const test = () => {
+    console.log(window.test.ZZ);
+  };
+
   return (
     <div className="App">
+      {/* <TEST /> */}
+      {/* <Header /> */}
+      {/* <WWE /> */}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className="App-link" onClick={() => test()}>
           Learn React
-        </a>
+        </div>
       </header>
     </div>
   );
