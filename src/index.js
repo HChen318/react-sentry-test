@@ -6,6 +6,7 @@ import { Integrations } from '@sentry/tracing';
 import './index.css';
 import App from './App'
 
+// if(process.env.NODE_ENV === 'production'){}
 Sentry.init({
   dsn: 'https://e22a0ccdf9a94366b365196bb5aaf512@webr.akulaku.net/sentry/116',
   integrations: [new Integrations.BrowserTracing({})],

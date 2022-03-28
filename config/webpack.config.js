@@ -29,6 +29,14 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const createEnvironmentHash = require("./webpack/persistentCache/createEnvironmentHash");
 const SentryWebpackPlugin = require("@sentry/webpack-plugin");
 
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
+const { DeleteSourceMapsPlugin } = require("webpack-delete-sourcemaps-plugin");
+
+const glob = require("glob");
+console.log(glob, "==glob");
+const { removeSync } = require("fs-extra");
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
 
@@ -187,6 +195,10 @@ module.exports = function (webpackEnv) {
     }
     return loaders;
   };
+
+  console.log(isEnvProduction, "===isEnvProduction");
+  console.log(shouldUseSourceMap, "===shouldUseSourceMap");
+  console.log(isEnvDevelopment, "===isEnvDevelopment");
 
   return {
     target: ["browserslist"],
@@ -572,17 +584,11 @@ module.exports = function (webpackEnv) {
         // dryRun: true,
         // project: 'react-test',
         // org: 'al-fe',
-
-        // include: ".",
-        // ignore: ["node_modules", "webpack.config.js"],
-        // org: "al-fe", // 组织名称
-        // project: "react-test", // 项目名称
-        // apiKey: "7acaf6cd41844374913cd5abdfcf406af17eacc1496a4cc0945fe8c92b5e62e8",
-        // baseSentryURL: "http://sentry.al.com", // 配置指到我们的自建服务器，api/0 是固定
-
         ignore: ["node_modules", "webpack.config.js"],
         configFile: "sentry.properties",
+        release: "1.0.1", // 上报版本
       }),
+
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -767,6 +773,11 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
+
+      new DeleteSourceMapsPlugin(),
+      // new CleanWebpackPlugin({
+      //   cleanAfterEveryBuildPatterns: ['static*.*.map'],
+      // }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

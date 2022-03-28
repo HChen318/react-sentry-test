@@ -55,6 +55,7 @@
     "terser-webpack-plugin": "^5.2.5",
     "web-vitals": "^2.1.4",
     "webpack": "^5.64.4",
+    "webpack-delete-sourcemaps-plugin": "^1.2.0",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1"
@@ -139,6 +140,7 @@
     ]
   },
   "devDependencies": {
-    "@sentry/webpack-plugin": "^1.18.8"
+    "@sentry/webpack-plugin": "^1.18.8",
+    "clean-webpack-plugin": "^4.0.0"
   }
 }

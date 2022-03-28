@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const test = () => {
-    console.log(window.test.ZZ);
+    console.log(window.test.wwwh);
   };
 
   return (
