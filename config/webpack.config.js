@@ -33,9 +33,10 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const { DeleteSourceMapsPlugin } = require("webpack-delete-sourcemaps-plugin");
 
-const glob = require("glob");
-console.log(glob, "==glob");
-const { removeSync } = require("fs-extra");
+
+
+
+
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
@@ -586,7 +587,7 @@ module.exports = function (webpackEnv) {
         // org: 'al-fe',
         ignore: ["node_modules", "webpack.config.js"],
         configFile: "sentry.properties",
-        release: "1.0.1", // 上报版本
+        // release: "1.0.1", // 上报版本
       }),
 
       // Generates an `index.html` file with the <script> injected.
@@ -773,11 +774,13 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
-
-      new DeleteSourceMapsPlugin(),
-      // new CleanWebpackPlugin({
-      //   cleanAfterEveryBuildPatterns: ['static*.*.map'],
-      // }),
+      // ok
+      // new DeleteSourceMapsPlugin(),
+      // ok
+      new CleanWebpackPlugin({
+        cleanAfterEveryBuildPatterns: ['**/*.map*'],
+        protectWebpackAssets: false
+      }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
